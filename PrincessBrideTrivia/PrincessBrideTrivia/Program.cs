@@ -25,7 +25,7 @@ namespace PrincessBrideTrivia
         public static string GetPercentCorrect(int numberCorrectAnswers, int numberOfQuestions)
         {
             decimal percentage = ((decimal)numberCorrectAnswers / numberOfQuestions * 100);
-            return Decimal.Round(percentage, 1) + "%";
+            return (int)percentage + "%";
         }
 
         public static bool AskQuestion(Question question)
