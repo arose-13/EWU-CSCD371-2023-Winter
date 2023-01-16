@@ -86,5 +86,49 @@ namespace PrincessBrideTrivia.Tests
                 File.AppendAllLines(filePath, lines);
             }
         }
+
+        [TestMethod]
+        [DataRow(3)]
+        [DataRow(5)]
+        [DataRow(10)]
+        [DataRow(13)]
+        public void GetShuffledIndexes_ReturnsDifferentIndexes(int maxValue)
+        {
+            int[] indexesToShuffle = Program.GetRandomIndexes(maxValue);
+
+            Assert.AreNotEqual(indexesToShuffle[0], indexesToShuffle[1]);
+
+            Assert.IsTrue(indexesToShuffle[0] < maxValue && indexesToShuffle[1] < maxValue);
+        }
+
+        [TestMethod]
+        [DataRow(3)]
+        [DataRow(4)]
+        [DataRow(7)]
+        [DataRow(9)]
+        public void ShuffleQuestions_ReturnsShuffledArray(int maxValue)
+        {
+            string filePath = Path.GetRandomFileName();
+            try
+            {
+                GenerateQuestionsFile(filePath, maxValue);
+
+                Question[] questions = Program.LoadQuestions(filePath);
+                Question[] shuffledQuestions = Program.LoadQuestions(filePath);
+                Program.ShuffleQuestions(shuffledQuestions);
+
+                bool shuffled = false;
+                for (int i = 0; i < questions.Length; i++)
+                {
+                    if (questions[i].Text != shuffledQuestions[i].Text)
+                        shuffled = true;
+                }
+                Assert.IsTrue(shuffled);
+            }
+            finally
+            {
+                File.Delete(filePath);
+            }
+        }
     }
 }
