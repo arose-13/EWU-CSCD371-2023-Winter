@@ -9,6 +9,7 @@ namespace PrincessBrideTrivia
         {
             string filePath = GetFilePath();
             Question[] questions = LoadQuestions(filePath);
+            ShuffleQuestions(questions);
 
             int numberCorrect = 0;
             for (int i = 0; i < questions.Length; i++)
@@ -94,6 +95,35 @@ namespace PrincessBrideTrivia
                 questions[i] = question;
             }
             return questions;
+        }
+
+        public static void ShuffleQuestions(Question[] questions)
+        {
+            int[] indexesToShuffle = new int[2];
+            Question temp;
+
+            for (int i = 0; i < questions.Length/2; i++)
+            {
+                indexesToShuffle = GetRandomIndexes(questions.Length);
+
+                temp = questions[indexesToShuffle[0]];
+                questions[indexesToShuffle[0]] = questions[indexesToShuffle[1]];
+                questions[indexesToShuffle[1]] = temp;
+            }
+        }
+
+        public static int[] GetRandomIndexes(int maxValue)
+        {
+            Random randomInt = new Random();
+            int[] indexes = new int[] { randomInt.Next(maxValue), randomInt.Next(maxValue) };
+
+            while (indexes[0] == indexes[1])
+            {
+                indexes[0] = randomInt.Next(maxValue);
+                indexes[0] = randomInt.Next(maxValue);
+            }
+
+            return indexes;
         }
     }
 }
