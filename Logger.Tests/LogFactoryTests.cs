@@ -6,6 +6,33 @@ namespace Logger.Tests
     [TestClass]
     public class LogFactoryTests
     {
+
+        [TestMethod]
+        public void Create_GivenFile_ReturnsFileLogger()
+        {
+            // Assemble
+            LogFactory factory = new LogFactory();
+
+            // Act
+            BaseLogger logger = factory.CreateLogger("FileLogger", "file1");
+
+            // Assert
+            Assert.IsInstanceOfType(logger, typeof(BaseLogger));
+        }
+
+        [TestMethod]
+        public void Configure_GivenFile_ChangesLoggerFile()
+        {
+            // Assemble
+            LogFactory factory = new LogFactory();
+            BaseLogger logger = factory.CreateLogger("FileLogger", "file1");
+
+            // Act
+            factory.ConfigureFileLogger(logger, "file2");
+
+            // Assert
+            Assert.IsFalse(logger.FilePath == "file1");
+        }
         
     }
 }
