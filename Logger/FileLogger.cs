@@ -15,7 +15,7 @@ namespace Logger
             DateTime localDate = DateTime.Now;
             CultureInfo cultureInfo = new CultureInfo("en-US");
 
-            string logMessage = $"{localDate.ToString("d", cultureInfo)} {level} {message}";
+            string logMessage = $"{localDate.ToString(cultureInfo)} {this.ClassName}: {level} {message}";
 
             using (StreamWriter sw = File.AppendText(this.FilePath))
             {

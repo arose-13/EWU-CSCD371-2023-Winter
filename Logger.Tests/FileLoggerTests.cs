@@ -24,7 +24,7 @@ namespace Logger.Tests
             string fileText = System.IO.File.ReadAllText(@"./file.txt");
 
             // Assert
-            Assert.AreEqual($"{localDate.ToString("d", cultureInfo)} {logLevel} Error Message" + "\n", fileText);
+            Assert.AreEqual($"{localDate.ToString(cultureInfo)} {logger.ClassName}: {logLevel} Error Message" + "\n", fileText);
         }
     }
 }
