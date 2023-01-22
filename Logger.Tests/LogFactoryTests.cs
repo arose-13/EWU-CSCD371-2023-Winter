@@ -14,7 +14,7 @@ namespace Logger.Tests
             LogFactory factory = new LogFactory();
 
             // Act
-            BaseLogger logger = factory.CreateLogger("FileLogger", "../file.txt");
+            BaseLogger logger = factory.CreateLogger("FileLogger", @"./file.txt");
 
             // Assert
             Assert.IsInstanceOfType(logger, typeof(BaseLogger));
@@ -25,13 +25,13 @@ namespace Logger.Tests
         {
             // Assemble
             LogFactory factory = new LogFactory();
-            BaseLogger logger = factory.CreateLogger("FileLogger", "../file.txt");
+            BaseLogger logger = factory.CreateLogger("FileLogger", @"./file.txt");
 
             // Act
-            factory.ConfigureFileLogger(logger, "../file2.txt");
+            factory.ConfigureFileLogger(logger, @"./file2.txt");
 
             // Assert
-            Assert.IsFalse(logger.FilePath == "../file.txt");
+            Assert.IsFalse(logger.FilePath == @"./file.txt");
         }
 
     }

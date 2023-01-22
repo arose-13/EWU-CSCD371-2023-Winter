@@ -11,13 +11,12 @@ namespace Logger
             logger.ClassName = className;
             if (className == "FileLogger")
             {
-                // FileLogger logger = new FileLogger();
                 ConfigureFileLogger(logger, filePath);
-                ConfigureClassNameLogger(logger, className);
-                // return logger;
+                logger.ClassName = className;
+                return logger;
             }
 
-            return logger;
+            return null;
         }
 
         public void ConfigureFileLogger(BaseLogger logger, string filePath)
@@ -25,14 +24,6 @@ namespace Logger
             if (!string.IsNullOrEmpty(filePath) && logger is not null)
             {
                 logger.FilePath = filePath;
-            }
-        }
-
-        public void ConfigureClassNameLogger(BaseLogger logger, string className)
-        {
-            if (!string.IsNullOrEmpty(className) && logger is not null)
-            {
-                logger.ClassName = className;
             }
         }
     }
