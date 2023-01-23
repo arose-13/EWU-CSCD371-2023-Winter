@@ -12,9 +12,10 @@ namespace Logger.Tests
         public void Error_WithNullLogger_ThrowsException()
         {
             // Arrange
+            string[] args = { "42" };
 
             // Act
-            //BaseLoggerMixins.Error(null, "");
+            BaseLoggerMixins.Error(null, "", args);
 
             // Assert
         }
@@ -24,9 +25,10 @@ namespace Logger.Tests
         {
             // Arrange
             var logger = new TestLogger();
+            string[] args = { "42" };
 
             // Act
-            //logger.Error("Message {0}", 42);
+            logger.Error(logger, "Message {0}", args);
 
             // Assert
             Assert.AreEqual(1, logger.LoggedMessages.Count);
