@@ -21,10 +21,10 @@ namespace Logger.Tests
             DateTime localDate = DateTime.Now;
             CultureInfo cultureInfo = new CultureInfo("en-US");
 
-            string fileText = System.IO.File.ReadAllText(@"./file.txt");
+            string fileText = (System.IO.File.ReadAllText(@"./file.txt")).Trim();
 
             // Assert
-            Assert.AreEqual($"{localDate.ToString(cultureInfo)} {logger.ClassName} {logLevel}: Error Message" + "\n", fileText);
+            Assert.AreEqual($"{localDate.ToString(cultureInfo)} {logger.ClassName} {logLevel}: Error Message", fileText);
         }
     }
 }
