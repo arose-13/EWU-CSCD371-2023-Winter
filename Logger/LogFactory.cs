@@ -1,13 +1,16 @@
 ﻿using System.Runtime.Serialization;
 using System;
-// [assembly: CLSCompliant(true)]
+[assembly: CLSCompliant(true)]
 namespace Logger
 {
     public class LogFactory
     {
+
+        private string? _FilePath;
+        public string FilePath { get => _FilePath!; set => _FilePath = value; }
         public BaseLogger? CreateLogger(string className, string filePath)
         {
-            BaseLogger logger = new FileLogger();
+            BaseLogger logger = new FileLogger(filePath);
             logger.ClassName = className;
             if (className == "FileLogger")
             {
@@ -23,6 +26,7 @@ namespace Logger
         {
             if (!string.IsNullOrEmpty(filePath) && logger is not null)
             {
+                FilePath = filePath;
                 logger.FilePath = filePath;
             }
         }
