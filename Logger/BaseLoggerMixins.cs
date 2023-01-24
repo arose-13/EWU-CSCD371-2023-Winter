@@ -12,9 +12,9 @@ namespace Logger
             }
             else
             {
-                logger.Log(LogLevel.Error, message);
+                logger.Log(LogLevel.Error, string.Format(message, messageArgs));
             }
-            
+
         }
 
         public static void Warning(BaseLogger logger, string message, string[] messageArgs)
@@ -25,7 +25,7 @@ namespace Logger
             }
             else
             {
-                logger.Log(LogLevel.Warning, message);
+                logger.Log(LogLevel.Warning, string.Format(message, messageArgs));
             }
         }
 
@@ -37,7 +37,7 @@ namespace Logger
             }
             else
             {
-                logger.Log(LogLevel.Information, message);
+                logger.Log(LogLevel.Information, string.Format(message, messageArgs));
             }
         }
 
@@ -49,7 +49,7 @@ namespace Logger
             }
             else
             {
-                logger.Log(LogLevel.Debug, message);
+                logger.Log(LogLevel.Debug, string.Format(message, messageArgs));
             }
         }
     }

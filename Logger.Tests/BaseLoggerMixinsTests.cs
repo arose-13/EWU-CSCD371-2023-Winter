@@ -28,7 +28,7 @@ namespace Logger.Tests
             string[] args = { "42" };
 
             // Act
-            logger.Error(logger, "Message {0}", args);
+            BaseLoggerMixins.Error(logger, "Message {0}", args);
 
             // Assert
             Assert.AreEqual(1, logger.LoggedMessages.Count);
