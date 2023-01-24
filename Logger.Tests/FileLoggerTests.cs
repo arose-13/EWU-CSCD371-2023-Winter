@@ -12,7 +12,7 @@ namespace Logger.Tests
         {
             // Assemble
             LogFactory factory = new LogFactory();
-            BaseLogger logger = factory.CreateLogger("FileLogger", @"./file.txt");
+            FileLogger logger = (FileLogger)factory.CreateLogger("FileLogger", @"./file.txt");
             Console.WriteLine(logger.FilePath);
 
             // Act

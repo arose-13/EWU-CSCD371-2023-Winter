@@ -7,10 +7,11 @@ using System.IO;
 
 namespace Logger
 {
-    internal sealed class FileLogger : BaseLogger
+    public class FileLogger : BaseLogger
     {
 
-        private new string FilePath { get; }
+        private string? _FilePath;
+        public string FilePath { get => _FilePath!; set => _FilePath = value; }
 
         public FileLogger(string filePath)
         {

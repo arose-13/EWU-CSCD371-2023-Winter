@@ -10,19 +10,23 @@ namespace Logger
         public string FilePath { get => _FilePath!; set => _FilePath = value; }
         public BaseLogger? CreateLogger(string className, string filePath)
         {
-            BaseLogger logger = new FileLogger(filePath);
-            logger.ClassName = className;
             if (className == "FileLogger")
             {
+                FileLogger logger = new FileLogger(filePath);
                 ConfigureFileLogger(logger, filePath);
                 logger.ClassName = className;
                 return logger;
+            }
+            else
+            {
+                BaseLogger logger = new FileLogger(filePath);
+                logger.ClassName = className;
             }
 
             return null;
         }
 
-        public void ConfigureFileLogger(BaseLogger logger, string filePath)
+        public void ConfigureFileLogger(FileLogger logger, string filePath)
         {
             if (!string.IsNullOrEmpty(filePath) && logger is not null)
             {

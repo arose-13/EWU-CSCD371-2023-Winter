@@ -25,7 +25,7 @@ namespace Logger.Tests
         {
             // Assemble
             LogFactory factory = new LogFactory();
-            BaseLogger logger = factory.CreateLogger("FileLogger", @"./file.txt");
+            FileLogger logger = (FileLogger)factory.CreateLogger("FileLogger", @"./file.txt");
 
             // Act
             factory.ConfigureFileLogger(logger, @"./file2.txt");
