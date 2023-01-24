@@ -5,7 +5,7 @@ namespace Logger
 {
     public class LogFactory
     {
-        public BaseLogger CreateLogger(string className, string filePath)
+        public BaseLogger? CreateLogger(string className, string filePath)
         {
             BaseLogger logger = new FileLogger();
             logger.ClassName = className;

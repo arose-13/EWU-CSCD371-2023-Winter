@@ -7,7 +7,7 @@ using System.IO;
 
 namespace Logger
 {
-    internal class FileLogger : BaseLogger
+    internal sealed class FileLogger : BaseLogger
     {
 
         public override void Log(LogLevel level, string message)

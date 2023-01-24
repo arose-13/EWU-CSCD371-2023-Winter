@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace Logger
 {
@@ -12,7 +13,8 @@ namespace Logger
             }
             else
             {
-                logger.Log(LogLevel.Error, string.Format(message, messageArgs));
+                CultureInfo culture = new CultureInfo("en-US");
+                logger.Log(LogLevel.Error, string.Format(culture, message, messageArgs));
             }
 
         }
@@ -25,7 +27,8 @@ namespace Logger
             }
             else
             {
-                logger.Log(LogLevel.Warning, string.Format(message, messageArgs));
+                CultureInfo culture = new CultureInfo("en-US");
+                logger.Log(LogLevel.Warning, string.Format(culture, message, messageArgs));
             }
         }
 
@@ -37,7 +40,8 @@ namespace Logger
             }
             else
             {
-                logger.Log(LogLevel.Information, string.Format(message, messageArgs));
+                CultureInfo culture = new CultureInfo("en-US");
+                logger.Log(LogLevel.Information, string.Format(culture, message, messageArgs));
             }
         }
 
@@ -49,7 +53,8 @@ namespace Logger
             }
             else
             {
-                logger.Log(LogLevel.Debug, string.Format(message, messageArgs));
+                CultureInfo culture = new CultureInfo("en-US");
+                logger.Log(LogLevel.Debug, string.Format(culture, message, messageArgs));
             }
         }
     }
