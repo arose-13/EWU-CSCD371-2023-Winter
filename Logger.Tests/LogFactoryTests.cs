@@ -34,5 +34,18 @@ namespace Logger.Tests
             Assert.IsFalse(logger.FilePath == @"./file.txt");
         }
 
+        [TestMethod]
+        public void Create_FileLoggerNotConfigured_ReturnsNull()
+        {
+            // Assemble
+            LogFactory factory = new LogFactory();
+
+            // Act
+            FileLogger logger = (FileLogger)factory.CreateLogger("FileLogger", "");
+
+            // Assert
+            Assert.IsNull(logger);
+        }
+
     }
 }

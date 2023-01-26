@@ -15,6 +15,11 @@ namespace Logger
                 FileLogger logger = new FileLogger(filePath);
                 ConfigureFileLogger(logger, filePath);
                 logger.ClassName = className;
+
+                if (string.IsNullOrEmpty(logger.FilePath))
+                {
+                    return null;
+                }
                 return logger;
             }
             else
