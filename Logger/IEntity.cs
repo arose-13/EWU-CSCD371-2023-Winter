@@ -2,5 +2,5 @@
 public interface IEntity
 {       
         public Guid ID {get; init;}
-        public string Name {get; set;}
+        public string Name { get; }
 }
