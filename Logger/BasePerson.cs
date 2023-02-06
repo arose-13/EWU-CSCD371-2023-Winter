@@ -9,9 +9,9 @@ namespace Logger;
 public abstract record class BasePerson : BaseEntity
 {
     // Implicit implementation so that we can create a class-specific Name implementation
-    public override string Name 
+    public override string Name
     {
-        get 
+        get
         {
             if (string.IsNullOrWhiteSpace(FullName.MiddleName))
                 return FullName.FirstName + " " + FullName.LastName;
@@ -24,7 +24,7 @@ public abstract record class BasePerson : BaseEntity
 
     public BasePerson(Guid id, string firstName, string lastName, string? middleName)
     {
-        ID = id;
+        Id = id;
         FullName = new FullName(firstName, lastName, middleName!);
     }
 }

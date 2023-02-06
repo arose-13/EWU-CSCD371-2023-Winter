@@ -4,6 +4,6 @@ namespace Logger;
 // implementation on deriving classes.
 public abstract record class BaseEntity : IEntity
 {
-    public Guid ID {get; init;}
+    public Guid Id { get; init; }
     public abstract string Name { get; }
 }

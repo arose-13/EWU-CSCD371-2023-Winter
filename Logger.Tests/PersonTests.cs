@@ -16,7 +16,7 @@ public class PersonTests
     {
         // Assemble
         Guid id = Guid.NewGuid();
-        Student student = new Student(id, "John", "Williams", "Towner");
+        Student student = new(id, "John", "Williams", "Towner");
 
         // Assert
         Assert.IsNotNull(student);
@@ -27,7 +27,7 @@ public class PersonTests
     {
         // Assemble
         Guid id = Guid.NewGuid();
-        Student student = new Student(id, "John", "Williams", null);
+        Student student = new(id, "John", "Williams", null);
 
         // Assert
         Assert.IsNotNull(student);
@@ -38,7 +38,7 @@ public class PersonTests
     {
         // Assemble
         Guid id = Guid.NewGuid();
-        Student student = new Student(id, "John", "Williams", "Towner");
+        Student student = new(id, "John", "Williams", "Towner");
 
         // Assert
         Assert.IsTrue(student.Name.Equals("John Towner Williams"));
@@ -49,7 +49,7 @@ public class PersonTests
     {
         // Assemble
         Guid id = Guid.NewGuid();
-        Student student = new Student(id, "John", "Williams", null);
+        Student student = new(id, "John", "Williams", null);
 
         // Assert
         Assert.IsTrue(student.Name.Equals("John Williams"));

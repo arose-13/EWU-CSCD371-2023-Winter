@@ -24,7 +24,7 @@ public record Book : BaseEntity
 
     public Book(Guid id, string firstName, string lastName, string? middleName)
     {
-        ID = id;
+        Id = id;
         Author = new FullName(firstName, lastName, middleName);
     }
 }

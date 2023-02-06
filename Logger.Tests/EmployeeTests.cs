@@ -15,7 +15,7 @@ public class EmployeeTests
     {
         // Assemble
         Guid id = Guid.NewGuid();
-        Employee employee = new Employee(id, "John", "Williams", "Towner", 1, "Composer");
+        Employee employee = new(id, "John", "Williams", "Towner", 1, "Composer");
 
         // Assert
         Assert.IsNotNull(employee);
