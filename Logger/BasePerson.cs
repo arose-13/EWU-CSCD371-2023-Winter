@@ -14,9 +14,9 @@ public abstract record class BasePerson : BaseEntity
         get
         {
             if (string.IsNullOrWhiteSpace(FullName.MiddleName))
-                return FullName.FirstName + " " + FullName.LastName;
+                return string.Format($"{FullName.FirstName} {FullName.LastName}");
             else
-                return FullName.FirstName + " " + FullName.MiddleName + " " + FullName.LastName;
+                return string.Format($"{FullName.FirstName} {FullName.MiddleName} {FullName.LastName}");
         }
     }
 

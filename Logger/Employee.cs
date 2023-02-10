@@ -8,10 +8,10 @@ namespace Logger;
 
 public record class Employee : BasePerson
 {
-    public int EmployeeID { get; set; }
-    public string? Profession { get; set; }
+    public int EmployeeID { get; }
+    public string? Profession { get; }
 
-    public Employee(Guid id, string firstName, string lastName, string? middleName, int employeeId, string? profession) : 
+    public Employee(Guid id, string firstName, string lastName, string? middleName, int employeeId, string? profession) :
         base(id, firstName, lastName, middleName)
     {
         EmployeeID = employeeId;
