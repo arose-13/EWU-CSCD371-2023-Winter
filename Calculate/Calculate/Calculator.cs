@@ -42,22 +42,36 @@ public class Calculator
         return (double)a / b;
     }
 
-    public void Calculate(string calulation)
+    public void Calculate(string calculation)
     {
-        string[] calcuationParts = calulation.Split(' ');
+        if (!calculation.Contains(' ') || string.IsNullOrWhiteSpace(calculation))
+        {
+            WriteLine("The entered operation is invalid!");
+            return;
+        }
+
+        string[] calcuationParts = calculation.Split(' ');
 
         try
         {
             int a = int.Parse(calcuationParts[0]);
             int b = int.Parse(calcuationParts[2]);
-            string operate = calcuationParts[1];
+            char operate = char.Parse(calcuationParts[1]);
 
-            if (string.IsNullOrWhiteSpace(operate))
-                throw new FormatException();
+            WriteLine($"{MathematicalOperations[operate](a, b)}");
+
         }
         catch (FormatException)
         {
             WriteLine("Invalid Operation");
+        }
+        catch (InvalidCastException)
+        {
+            WriteLine("Invalid Cast!");
+        }
+        catch (KeyNotFoundException)
+        {
+            WriteLine("An invalid operation was specified! (Key not found)");
         }
     }
 }

@@ -1,3 +1,7 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Reflection.Metadata.Ecma335;
+using static System.Net.Mime.MediaTypeNames;
+
 namespace Calculate.Tests
 {
     [TestClass]
@@ -7,22 +11,62 @@ namespace Calculate.Tests
         public void GivenWriteLineMethod_WriteLineSuccessfullyWrites()
         {
             // Assemble
-            Calculator calculator = new(System.Console.WriteLine, System.Console.ReadLine);
+            string text = "Dummy text.";
+            Calculator calculator = new Calculator
+            {
+                WriteLine = (string input) => { text = input; },
+                ReadLine = System.Console.ReadLine
+            };
 
             // Act
             calculator.WriteLine("Hello World!");
+
+            // Assert
+            Assert.IsTrue(text.Equals("Hello World!"));
             
         }
 
         [TestMethod]
-        public void DefaultConstructor_WriteLineSuccessfullyWrites()
+        public void GivenInvalidOperation_WritesError()
         {
             // Assemble
-            Calculator calculator = new();
+            string output = "Dummy test.";
+            Calculator calculator = new Calculator
+            {
+                WriteLine = (string input) => { output = input; },
+                ReadLine = System.Console.ReadLine
+            };
 
             // Act
-            calculator.WriteLine("Hello World!");
+            calculator.Calculate("1 & 2");
 
+            // Assert
+            Assert.IsTrue(output.Contains("invalid"));
+        }
+
+        [TestMethod]
+        public void GivenValidOperations_AllOperationsReturnCorrectResult()
+        {
+            // Assemble
+            double result = 0;
+            Calculator calculator = new Calculator
+            {
+                WriteLine = (string input) => { result = double.Parse(input); },
+                ReadLine = System.Console.ReadLine
+            };
+
+            // Act and Assert
+            calculator.Calculate("3 + 3");
+            Assert.IsTrue(result == 6);
+
+            calculator.Calculate("3 - 3");
+            Assert.IsTrue(result == 0);
+
+            calculator.Calculate("3 * 3");
+            Assert.IsTrue(result == 9);
+
+            calculator.Calculate("3 / 3");
+            Assert.IsTrue(result == 1);
         }
     }
 }
