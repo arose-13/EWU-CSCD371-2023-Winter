@@ -10,6 +10,14 @@ public class Calculator
 {
     public Action<string> WriteLine { get; init; }
     public Func<string> ReadLine { get; init; }
+    public IReadOnlyDictionary<char, Func<int, int, int>> MathematicalOperations { get; }
+        = new Dictionary<char, Func<int, int, int>>
+        {
+            { "+", Add() },
+            { "-", Subtract() },
+            { "*", Multiply() },
+            { "/", Divide() },
+        };
 
     public Calculator()
     {
