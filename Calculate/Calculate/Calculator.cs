@@ -10,13 +10,13 @@ public class Calculator
 {
     public Action<string> WriteLine { get; init; }
     public Func<string> ReadLine { get; init; }
-    public IReadOnlyDictionary<char, Func<int, int, int>> MathematicalOperations { get; }
-        = new Dictionary<char, Func<int, int, int>>
+    public IReadOnlyDictionary<char, Func<int, int, double>> MathematicalOperations { get; }
+        = new Dictionary<char, Func<int, int, double>>
         {
-            { "+", Add() },
-            { "-", Subtract() },
-            { "*", Multiply() },
-            { "/", Divide() },
+            { '+', Add },
+            { '-', Subtract },
+            { '*', Multiple },
+            { '/', Divide },
         };
 
     public Calculator()
@@ -29,5 +29,16 @@ public class Calculator
     {
         WriteLine = writeLine;
         ReadLine = readLine;
+    }
+
+    public static double Add(int a, int b) => a + b;
+    public static double Subtract(int a, int b) => a - b;
+    public static double Multiple(int a, int b) => a * b;
+    public static double Divide(int a, int b)
+    {
+        if (b is 0)
+            return 0;
+
+        return (double)a / b;
     }
 }
