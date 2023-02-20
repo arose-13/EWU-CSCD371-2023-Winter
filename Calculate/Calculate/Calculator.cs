@@ -9,7 +9,7 @@ namespace Calculate;
 public class Calculator
 {
     public Action<string> WriteLine { get; init; }
-    public Func<string> ReadLine { get; init; }
+    public Func<string?> ReadLine { get; init; }
     public IReadOnlyDictionary<char, Func<int, int, double>> MathematicalOperations { get; }
         = new Dictionary<char, Func<int, int, double>>
         {
@@ -40,5 +40,24 @@ public class Calculator
             return 0;
 
         return (double)a / b;
+    }
+
+    public void Calculate(string calulation)
+    {
+        string[] calcuationParts = calulation.Split(' ');
+
+        try
+        {
+            int a = int.Parse(calcuationParts[0]);
+            int b = int.Parse(calcuationParts[2]);
+            string operate = calcuationParts[1];
+
+            if (string.IsNullOrWhiteSpace(operate))
+                throw new FormatException();
+        }
+        catch (FormatException)
+        {
+            WriteLine("Invalid Operation");
+        }
     }
 }
