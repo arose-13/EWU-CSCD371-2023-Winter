@@ -42,8 +42,11 @@ public class Calculator
         return (double)a / b;
     }
 
-    public void Calculate(string calculation)
+    public void Calculate(string? calculation)
     {
+        if (calculation is null)
+            return;
+
         if (!calculation.Contains(' ') || string.IsNullOrWhiteSpace(calculation))
         {
             WriteLine("The entered operation is invalid!");
