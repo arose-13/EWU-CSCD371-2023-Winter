@@ -76,5 +76,9 @@ public class Calculator
         {
             WriteLine("An invalid operation was specified! (Key not found)");
         }
+        catch (IndexOutOfRangeException)
+        {
+            WriteLine("Invalid please use correct amount of spacing!");
+        }
     }
 }
