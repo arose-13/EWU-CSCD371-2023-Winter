@@ -38,12 +38,14 @@ public class Calculator
 
     public void Calculate(string? calculation)
     {
-        if (calculation is null)
-            return;
-
-        if (!calculation.Contains(' ') || string.IsNullOrWhiteSpace(calculation))
+        if (string.IsNullOrWhiteSpace(calculation))
         {
-            WriteLine("The entered operation is invalid!");
+            WriteLine("Error: Cannot accept a null operation!");
+            return;
+        }
+        else if (!calculation.Contains(' '))
+        {
+            WriteLine("Error: Operation must contain spaces between the numbers and the operator!");
             return;
         }
 
@@ -60,23 +62,23 @@ public class Calculator
         }
         catch (FormatException)
         {
-            WriteLine("Invalid Operation");
+            WriteLine("Error: Invalid Format!");
         }
         catch (DivideByZeroException)
         {
-            WriteLine("Invalid Operation");
+            WriteLine("Error: Cannot divide by 0!");
         }
         catch (InvalidCastException)
         {
-            WriteLine("Invalid Cast!");
+            WriteLine("Error: Invalid Cast!");
         }
         catch (KeyNotFoundException)
         {
-            WriteLine("An invalid operation was specified! (Key not found)");
+            WriteLine("Error: An invalid operation was specified! (Key not found)");
         }
         catch (IndexOutOfRangeException)
         {
-            WriteLine("Invalid please use correct amount of spacing!");
+            WriteLine("Error: Please use correct amount of spacing!");
         }
     }
 }
