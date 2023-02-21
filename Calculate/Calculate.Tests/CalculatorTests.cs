@@ -22,7 +22,7 @@ namespace Calculate.Tests
             calculator.WriteLine("Hello World!");
 
             // Assert
-            Assert.IsTrue(text.Equals("Hello World!"));
+            Assert.AreEqual<string>(text, "Hello World!");
             
         }
 
@@ -57,16 +57,16 @@ namespace Calculate.Tests
 
             // Act and Assert
             calculator.Calculate("3 + 3");
-            Assert.IsTrue(result == 6);
+            Assert.AreEqual<double>(result, 6);
 
             calculator.Calculate("3 - 3");
-            Assert.IsTrue(result == 0);
+            Assert.AreEqual<double>(result, 0);
 
             calculator.Calculate("3 * 3");
-            Assert.IsTrue(result == 9);
+            Assert.AreEqual<double>(result, 9);
 
             calculator.Calculate("3 / 3");
-            Assert.IsTrue(result == 1);
+            Assert.AreEqual<double>(result, 1);
         }
     }
 }
