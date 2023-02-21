@@ -25,7 +25,7 @@ public class Calculator
         ReadLine = System.Console.ReadLine;
     }
 
-    public Calculator(Action<string> writeLine, Func<string> readLine)
+    public Calculator(Action<string> writeLine, Func<string?> readLine)
     {
         WriteLine = writeLine;
         ReadLine = readLine;
