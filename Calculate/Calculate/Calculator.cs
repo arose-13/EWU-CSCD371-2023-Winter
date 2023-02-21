@@ -10,8 +10,8 @@ public class Calculator
 {
     public Action<string> WriteLine { get; init; }
     public Func<string?> ReadLine { get; init; }
-    public IReadOnlyDictionary<char, Func<int, int, double>> MathematicalOperations { get; }
-        = new Dictionary<char, Func<int, int, double>>
+    public IReadOnlyDictionary<char, Func<double, double, double>> MathematicalOperations { get; }
+        = new Dictionary<char, Func<double, double, double>>
         {
             { '+', Add },
             { '-', Subtract },
@@ -31,10 +31,10 @@ public class Calculator
         ReadLine = readLine;
     }
 
-    public static double Add(int a, int b) => a + b;
-    public static double Subtract(int a, int b) => a - b;
-    public static double Multiple(int a, int b) => a * b;
-    public static double Divide(int a, int b) => a / b;
+    public static double Add(double a, double b) => a + b;
+    public static double Subtract(double a, double b) => a - b;
+    public static double Multiple(double a, double b) => a * b;
+    public static double Divide(double a, double b) => a / b;
 
     public void Calculate(string? calculation)
     {
@@ -53,11 +53,14 @@ public class Calculator
 
         try
         {
-            int a = int.Parse(calcuationParts[0]);
-            int b = int.Parse(calcuationParts[2]);
+            double a = double.Parse(calcuationParts[0]);
+            double b = double.Parse(calcuationParts[2]);
             char operate = char.Parse(calcuationParts[1]);
 
-            WriteLine($"{MathematicalOperations[operate](a, b)}");
+            if (operate == '/' && b == 0)
+                throw new DivideByZeroException();
+            else
+                WriteLine($"{MathematicalOperations[operate](a, b)}");
 
         }
         catch (FormatException)

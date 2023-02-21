@@ -72,6 +72,24 @@ public class CalculatorTests
     }
 
     [TestMethod]
+    public void Calculate_GivenOperationWithRemainder_WritesDecimal()
+    {
+        // Assemble
+        double output = 0;
+        Calculator calculator = new Calculator
+        {
+            WriteLine = (string input) => { output = double.Parse(input); },
+            ReadLine = System.Console.ReadLine
+        };
+
+        // Act
+        calculator.Calculate("5 / 2");
+
+        // Assert
+        Assert.AreEqual<double>(output, 2.5);
+    }
+
+    [TestMethod]
     public void Calculate_GivenInvalidOperation_WritesErrorMessage()
     {
         // Assemble
@@ -143,6 +161,7 @@ public class CalculatorTests
         Assert.IsTrue(output.Contains("Error: "));
     }
 
+    [TestMethod]
     public void Calculate_GivenOperationWithOnlyWhiteSpace_WritesErrorMessage()
     {
         // Assemble
