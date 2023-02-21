@@ -53,12 +53,14 @@ public class Calculator
 
         try
         {
-            double a = double.Parse(calcuationParts[0]);
-            double b = double.Parse(calcuationParts[2]);
-            char operate = char.Parse(calcuationParts[1]);
+            bool operand1 = double.TryParse(calcuationParts[0], out double a);
+            bool operand2 = double.TryParse(calcuationParts[2], out double b);
+            bool operation = char.TryParse(calcuationParts[1], out char operate);
 
             if (operate == '/' && b == 0)
                 throw new DivideByZeroException();
+            else if (!operand1 || !operand2 || !operation)
+                throw new FormatException();
             else
                 WriteLine($"{MathematicalOperations[operate](a, b)}");
 
