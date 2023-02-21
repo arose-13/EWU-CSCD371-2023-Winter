@@ -34,13 +34,7 @@ public class Calculator
     public static double Add(int a, int b) => a + b;
     public static double Subtract(int a, int b) => a - b;
     public static double Multiple(int a, int b) => a * b;
-    public static double Divide(int a, int b)
-    {
-        if (b is 0)
-            return 0;
-
-        return (double)a / b;
-    }
+    public static double Divide(int a, int b) => a / b;
 
     public void Calculate(string? calculation)
     {
@@ -65,6 +59,10 @@ public class Calculator
 
         }
         catch (FormatException)
+        {
+            WriteLine("Invalid Operation");
+        }
+        catch (DivideByZeroException)
         {
             WriteLine("Invalid Operation");
         }
