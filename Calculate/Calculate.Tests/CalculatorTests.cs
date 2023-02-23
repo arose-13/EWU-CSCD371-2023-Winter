@@ -15,7 +15,6 @@ public class CalculatorTests
         Program program = new Program
         {
             WriteLine = (string input) => { result = double.Parse(input); },
-            ReadLine = System.Console.ReadLine
         };
 
         // Act and Assert
@@ -40,7 +39,6 @@ public class CalculatorTests
         Program program = new Program
         {
             WriteLine = (string input) => { output = double.Parse(input); },
-            ReadLine = System.Console.ReadLine
         };
 
         // Act
@@ -58,7 +56,6 @@ public class CalculatorTests
         Program program = new Program
         {
             WriteLine = (string input) => { output = input; },
-            ReadLine = System.Console.ReadLine
         };
 
         // Act
@@ -76,7 +73,6 @@ public class CalculatorTests
         Program program = new Program
         {
             WriteLine = (string input) => { output = input; },
-            ReadLine = System.Console.ReadLine
         };
 
         // Act
@@ -94,7 +90,6 @@ public class CalculatorTests
         Program program = new Program
         {
             WriteLine = (string input) => { output = input; },
-            ReadLine = System.Console.ReadLine
         };
 
         // Act
@@ -112,7 +107,6 @@ public class CalculatorTests
         Program program = new Program
         {
             WriteLine = (string input) => { output = input; },
-            ReadLine = System.Console.ReadLine
         };
 
         // Act
@@ -130,7 +124,6 @@ public class CalculatorTests
         Program program = new Program
         {
             WriteLine = (string input) => { output = input; },
-            ReadLine = System.Console.ReadLine
         };
 
         // Act

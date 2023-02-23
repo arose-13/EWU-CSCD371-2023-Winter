@@ -37,7 +37,6 @@ public class ProgramTests
         Program program = new Program
         {
             WriteLine = (string input) => { text = input; },
-            ReadLine = System.Console.ReadLine
         };
 
         // Act
@@ -45,6 +44,24 @@ public class ProgramTests
 
         // Assert
         Assert.AreEqual<string>(text, "Hello World!");
+
+    }
+
+    [TestMethod]
+    public void ReadLine_GivenReadLineMethod_ReadLineSuccessfullyReads()
+    {
+        // Assemble
+        string text = "Hello World!";
+        Program program = new Program
+        {
+            ReadLine = () => { return text; },
+        };
+
+        // Act
+        string result = program.ReadLine()!;
+
+        // Assert
+        Assert.AreEqual<string>(result, "Hello World!");
 
     }
 }
