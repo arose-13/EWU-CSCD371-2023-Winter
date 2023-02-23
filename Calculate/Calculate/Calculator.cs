@@ -45,10 +45,6 @@ public class Calculator
         {
             return "Error: Cannot divide by 0!";
         }
-        catch (InvalidCastException)
-        {
-            return "Error: Invalid Cast!";
-        }
         catch (KeyNotFoundException)
         {
             return "Error: An invalid operation was specified! (Key not found)";
