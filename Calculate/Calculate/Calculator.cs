@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Calculate;
+﻿namespace Calculate;
 
 public class Calculator
 {
-    public IReadOnlyDictionary<char, Func<double, double, double>> MathematicalOperations { get; }
-        = new Dictionary<char, Func<double, double, double>>
+    public IReadOnlyDictionary<char, Func<int, int, int>> MathematicalOperations { get; }
+        = new Dictionary<char, Func<int, int, int>>
         {
             { '+', Add },
             { '-', Subtract },
@@ -17,10 +11,10 @@ public class Calculator
             { '/', Divide },
         };
 
-    public static double Add(double a, double b) => a + b;
-    public static double Subtract(double a, double b) => a - b;
-    public static double Multiple(double a, double b) => a * b;
-    public static double Divide(double a, double b) => a / b;
+    public static int Add(int a, int b) => a + b;
+    public static int Subtract(int a, int b) => a - b;
+    public static int Multiple(int a, int b) => a * b;
+    public static int Divide(int a, int b) => a / b;
 
     public string TryCalculate(string? calculation)
     {
@@ -31,8 +25,8 @@ public class Calculator
         {
             string[] calcuationParts = calculation.Split(' ');
 
-            bool operand1 = double.TryParse(calcuationParts[0], out double a);
-            bool operand2 = double.TryParse(calcuationParts[2], out double b);
+            bool operand1 = int.TryParse(calcuationParts[0], out int a);
+            bool operand2 = int.TryParse(calcuationParts[2], out int b);
             bool operation = char.TryParse(calcuationParts[1], out char operate);
 
             if (operate == '/' && b == 0)
