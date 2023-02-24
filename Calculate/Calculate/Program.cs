@@ -29,14 +29,14 @@ public class Program
         while (sentenal == 1)
         {
             program.WriteLine("---Enter calculation or press q to quit---");
-            string? input1 = program.ReadLine();
-            if (input1 == "q")
+            string? userInput = program.ReadLine();
+            if (userInput == "q")
             {
                 sentenal--;
             }
             else
             {
-                program.WriteLine(program.calculator.TryCalculate(input1));
+                program.WriteLine(program.calculator.TryCalculate(userInput));
             }
         }
     }

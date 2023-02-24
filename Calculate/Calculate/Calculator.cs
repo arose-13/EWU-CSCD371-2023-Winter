@@ -11,10 +11,10 @@ public class Calculator
             { '/', Divide },
         };
 
-    public static int Add(int a, int b) => a + b;
-    public static int Subtract(int a, int b) => a - b;
-    public static int Multiple(int a, int b) => a * b;
-    public static int Divide(int a, int b) => a / b;
+    public static int Add(int leftOperand, int rightOperand) => leftOperand + rightOperand;
+    public static int Subtract(int leftOperand, int rightOperand) => leftOperand - rightOperand;
+    public static int Multiple(int leftOperand, int rightOperand) => leftOperand * rightOperand;
+    public static int Divide(int leftOperand, int rightOperand) => leftOperand / rightOperand;
 
     public string TryCalculate(string? calculation)
     {
@@ -25,16 +25,16 @@ public class Calculator
         {
             string[] calcuationParts = calculation.Split(' ');
 
-            bool operand1 = int.TryParse(calcuationParts[0], out int a);
-            bool operand2 = int.TryParse(calcuationParts[2], out int b);
-            bool operation = char.TryParse(calcuationParts[1], out char operate);
+            bool containsLeft = int.TryParse(calcuationParts[0], out int leftOperand);
+            bool containsRight = int.TryParse(calcuationParts[2], out int rightOperand);
+            bool containsOperation = char.TryParse(calcuationParts[1], out char operation);
 
-            if (operate == '/' && b == 0)
+            if (operation == '/' && rightOperand == 0)
                 throw new DivideByZeroException();
-            else if (!operand1 || !operand2 || !operation)
+            else if (!containsLeft || !containsRight || !containsOperation || calcuationParts.Length > 3)
                 throw new FormatException();
             else
-                return $"{MathematicalOperations[operate](a, b)}";
+                return $"{MathematicalOperations[operation](leftOperand, rightOperand)}";
 
         }
         catch (FormatException)
