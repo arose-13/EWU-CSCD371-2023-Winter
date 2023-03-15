@@ -87,16 +87,29 @@ public class PingProcessTests
 
     [TestMethod]
     [ExpectedException(typeof(AggregateException))]
-    public void RunAsync_UsingTplWithCancellation_CatchAggregateExceptionWrapping()
+    async public void RunAsync_UsingTplWithCancellation_CatchAggregateExceptionWrapping()
     {
-
+        CancellationTokenSource tokenSource = new();
+        PingResult result =  await Sut.RunAsync("localhost", tokenSource.Token);
+        tokenSource.Cancel();
     }
 
     [TestMethod]
     [ExpectedException(typeof(TaskCanceledException))]
-    public void RunAsync_UsingTplWithCancellation_CatchAggregateExceptionWrappingTaskCanceledException()
+    async public void RunAsync_UsingTplWithCancellation_CatchAggregateExceptionWrappingTaskCanceledException()
     {
         // Use exception.Flatten()
+        try
+        {
+            CancellationTokenSource tokenSource = new();
+            PingResult result = await Sut.RunAsync("localhost", tokenSource.Token);
+            tokenSource.Cancel();
+        }
+        catch (AggregateException ex)
+        {
+            foreach (Exception innerEx in ex.Flatten().InnerExceptions)
+                throw innerEx;
+        }
     }
 
     [TestMethod]
