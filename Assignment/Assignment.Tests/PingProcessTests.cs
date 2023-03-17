@@ -127,6 +127,52 @@ public class PingProcessTests
     }
 
     [TestMethod]
+    async public Task RunAsync_IEnumerableHostAddresses_CorrectLineCount()
+    {
+        IEnumerable<string> hostNames = new List<string> { "localhost", "localhost", "localhost", "localhost", "localhost" };
+        CancellationTokenSource tokenSource = new();
+        PingResult result = await Sut.RunAsync(hostNames, tokenSource.Token);
+
+        int expectedLineCount = PingOutputLikeExpression.Split(Environment.NewLine).Length * hostNames.Count();
+        int? lineCount = result.StdOutput?.Split(Environment.NewLine).Length;
+
+        Assert.AreEqual(expectedLineCount, lineCount);
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(AggregateException))]
+    public void RunAsync_IEnumerableHostAddresses_CatchAggregateExceptionWrapping()
+    {
+        CancellationTokenSource tokenSource = new();
+        IEnumerable<string> hostNames = new List<string> { "localhost", "localhost", "localhost", "localhost", "localhost" };
+        Task task = Task.Run(() => Sut.RunAsync(hostNames, tokenSource.Token));
+        tokenSource.Cancel();
+        Assert.IsTrue(tokenSource.IsCancellationRequested);
+        task.Wait();
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(TaskCanceledException))]
+    public void RunAsync_IEnumerableHostAddresses_CatchAggregateExceptionWrappingTaskCanceledException()
+    {
+        // Use exception.Flatten()
+        try
+        {
+            CancellationTokenSource tokenSource = new();
+            IEnumerable<string> hostNames = new List<string> { "localhost", "localhost", "localhost", "localhost", "localhost" };
+            Task task = Task.Run(() => Sut.RunAsync(hostNames, tokenSource.Token));
+            tokenSource.Cancel();
+            Assert.IsTrue(tokenSource.IsCancellationRequested);
+            task.Wait();
+        }
+        catch (AggregateException ex)
+        {
+            foreach (Exception innerEx in ex.Flatten().InnerExceptions)
+                throw innerEx;
+        }
+    }
+
+    [TestMethod]
 #pragma warning disable CS1998 // Remove this
     async public Task RunLongRunningAsync_UsingTpl_Success()
     {
