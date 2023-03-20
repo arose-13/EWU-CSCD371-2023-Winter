@@ -87,10 +87,12 @@ public class PingProcess
         return task.Result;
     }
 
-    public Task<int> RunLongRunningAsync(ProcessStartInfo startInfo, Action<string?>? progressOutput, Action<string?>? progressError, CancellationToken token)
+    public async Task<PingResult> RunLongRunningAsync(ProcessStartInfo startInfo, Action<string?>? progressOutput, Action<string?>? progressError, CancellationToken token)
     {
         Process process = RunProcessInternal(startInfo, progressOutput, progressError, token);
-        return null!;
+        Task<PingResult> task = await Task.Factory.StartNew(() => RunLongRunningAsync(process.StartInfo.Arguments, token));
+
+        return task.Result;
     }
 
     private Process RunProcessInternal(
