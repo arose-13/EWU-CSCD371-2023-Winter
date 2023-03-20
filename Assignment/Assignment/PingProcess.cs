@@ -33,9 +33,9 @@ public class PingProcess
     async public Task<PingResult> RunAsync(
         string hostNameOrAddress, CancellationToken cancellationToken = default)
     {
-        Task<PingResult> task = Task.Run(() => Run(hostNameOrAddress));
-        await task;
         cancellationToken.ThrowIfCancellationRequested();
+        Task<PingResult> task = Task.Run(() => Run(hostNameOrAddress), cancellationToken);
+        await task;
 
         return task.Result;
     }
@@ -66,8 +66,7 @@ public class PingProcess
         ParallelQuery<Task<PingResult>>? all = hostNameOrAddresses.AsParallel().Select(async item =>
         {
             cancellationToken.ThrowIfCancellationRequested();
-            Task<PingResult> task = RunAsync(item);
-
+            Task<PingResult> task = RunAsync(item, cancellationToken);
             await task.WaitAsync(cancellationToken);
             return task.Result;
         });
@@ -83,14 +82,14 @@ public class PingProcess
     async public Task<PingResult> RunLongRunningAsync(
         string hostNameOrAddress, CancellationToken cancellationToken = default)
     {
-        Task<PingResult> task = await Task.Factory.StartNew(() => RunAsync(hostNameOrAddress, cancellationToken), TaskCreationOptions.LongRunning);
+        Task<PingResult> task = Task.Factory.StartNew(() => Run(hostNameOrAddress), cancellationToken, TaskCreationOptions.LongRunning, TaskScheduler.Current);
         await task;
         return task.Result;
     }
 
     public Task<int> RunLongRunningAsync(ProcessStartInfo startInfo, Action<string?>? progressOutput, Action<string?>? progressError, CancellationToken token)
     {
-
+        Process process = RunProcessInternal(startInfo, progressOutput, progressError, token);
         return null!;
     }
 
