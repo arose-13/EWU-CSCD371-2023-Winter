@@ -123,7 +123,7 @@ public class PingProcessTests
         int expectedLineCount = PingOutputLikeExpression.Split(Environment.NewLine).Length * hostNames.Length;
         int? lineCount = result.StdOutput?.Split(Environment.NewLine).Length;
 
-        Assert.AreEqual(expectedLineCount, lineCount);
+        Assert.AreEqual<int?>(expectedLineCount, lineCount);
     }
 
     [TestMethod]
@@ -136,7 +136,7 @@ public class PingProcessTests
         int expectedLineCount = PingOutputLikeExpression.Split(Environment.NewLine).Length * hostNames.Count();
         int? lineCount = result.StdOutput?.Split(Environment.NewLine).Length;
 
-        Assert.AreEqual(expectedLineCount, lineCount);
+        Assert.AreEqual<int?>(expectedLineCount, lineCount);
     }
 
     [TestMethod]
@@ -173,13 +173,11 @@ public class PingProcessTests
     }
 
     [TestMethod]
-#pragma warning disable CS1998 // Remove this
     async public Task RunLongRunningAsync_UsingTpl_Success()
     {
-        PingResult result = Sut.RunLongRunningAsync("localhost").Result;
+        PingResult result = await Sut.RunLongRunningAsync("localhost");
         AssertValidPingOutput(result);
     }
-#pragma warning restore CS1998 // Remove this
 
     [TestMethod]
     public void StringBuilderAppendLine_InParallel_IsNotThreadSafe()
@@ -188,7 +186,7 @@ public class PingProcessTests
         System.Text.StringBuilder stringBuilder = new();
         numbers.AsParallel().ForAll(item => stringBuilder.AppendLine(""));
         int lineCount = stringBuilder.ToString().Split(Environment.NewLine).Length;
-        Assert.AreNotEqual(lineCount, numbers.Count() + 1);
+        Assert.AreNotEqual<int>(lineCount, numbers.Count() + 1);
     }
 
     readonly string PingOutputLikeExpression = @"
